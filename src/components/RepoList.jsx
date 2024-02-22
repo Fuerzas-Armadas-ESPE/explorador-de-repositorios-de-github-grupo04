@@ -11,7 +11,7 @@ const RepoList = ({ username }) => {
         const response = await axios.get(
           `https://api.github.com/users/${username}/repos`
         );
-        const sortedRepos = response.data.sort((a, b) => b.size - a.size);
+        const sortedRepos = response.data.sort((a, b) => b.stargazers_count - a.stargazers_count);
         const topRepos = sortedRepos.slice(0, 5);
         setRepos(topRepos);
       } catch (error) {
@@ -24,11 +24,13 @@ const RepoList = ({ username }) => {
 
   return (
     <div>
-      <h2>Top 5 repositorios con más participación de {username}</h2>
+      <h2>Top 5 repositorios con más estrellas de {username}</h2>
       <ul>
         {repos.map((repo) => (
           <li key={repo.id}>
-            {repo.name} - Tamaño: {repo.size}
+            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+              {repo.name} - Estrellas: {repo.stargazers_count}
+            </a>
           </li>
         ))}
       </ul>

@@ -6,10 +6,12 @@ import {
   Container,
   AppBar,
   Toolbar,
-  Grid,
+  CssBaseline,
   Select,
   MenuItem,
+  Grid,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import RepoList from "./components/RepoList";
 
 function App() {
@@ -35,8 +37,22 @@ function App() {
     setShowRepoList(true);
   };
 
+  // Tema personalizado con colores oscuros
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#1976d2',
+      },
+      secondary: {
+        main: '#ff4081',
+      },
+    },
+  });
+
   return (
-    <div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -97,7 +113,7 @@ function App() {
           />
         )}
       </Container>
-    </div>
+    </ThemeProvider>
   );
 }
 
